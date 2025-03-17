@@ -6,7 +6,7 @@ function App() {
   return (
     <Box>
       <Typography>Group one FE</Typography>
-      <Button color='error' variant='outlined'>Testing</Button>
+      <Button color='primary' variant='outlined'>Testing</Button>
     </Box>
   )
 }
