@@ -1,13 +1,12 @@
-import { Box, Button, Typography } from '@mui/material'
+import AppRoutes from './routes'
 import './App.sass'
 
 function App() {
 
   return (
-    <Box>
-      <Typography>Group one FE</Typography>
-      <Button color='error' variant='outlined'>Testing</Button>
-    </Box>
+    <>
+      <AppRoutes />
+    </>
   )
 }
 

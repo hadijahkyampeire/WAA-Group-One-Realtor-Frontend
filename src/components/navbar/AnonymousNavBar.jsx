@@ -1,0 +1,26 @@
+import React from "react";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import logo from "../../assets/logo.png"
+import { Link } from "react-router-dom";
+
+const AnonymousNavbar = () => {
+  const theme = useTheme();
+
+  return (
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper, boxShadow: "none" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <img src={logo} width={30} height={30} alt="Honss"/>
+        <Typography variant="h6" sx={{ fontWeight: "bold", color: theme.palette.primary.main }}>
+          Honss Real Estates
+        </Typography>
+
+        <Button component={Link} to="/signin" variant="contained" color="primary">
+          Sign In
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default AnonymousNavbar;
