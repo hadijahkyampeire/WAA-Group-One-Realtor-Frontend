@@ -1,0 +1,365 @@
+export const properties = [
+  {
+    "id": "11dab232-ddd5-4a60-bd02-149ff228612e",
+    "enabled": true,
+    "createDate": "2025-03-17T22:56:05.989606",
+    "updateDate": "2025-03-17T22:56:05.989615",
+    "address": {
+      "id": "fbb43577-8f35-431f-8b85-469ebe6deaea",
+      "enabled": true,
+      "createDate": "2025-03-17T22:56:05.987228",
+      "updateDate": "2025-03-17T22:56:05.987238",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    "propertyStatus": "CONTIGENT",
+    "listingType": "FOR_RENT",
+    "propertyType": "MULTI_FAMILY",
+    "images": [
+      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhvdXNlc3xlbnwwfHwwfHx8MA%3D%3D",
+      "https://media.istockphoto.com/id/182159305/photo/modern-bedroom.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZR6Pqd5qXMLwtu3nriDY5LVFqjyVnKNO9kf37weeKH0=",
+      "https://media.istockphoto.com/id/1188606673/photo/townhouse-with-spacious-living-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=WJNPIjLDyzyi8_ZMfMAQ80sPxN27HUNlTaGbREZ26h4="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Sanjaya",
+      "lastName": "Sapkota",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  },
+  {
+    "id": "92abb406-16c8-40be-b208-808f23288bcc",
+    "enabled": true,
+    "createDate": "2025-03-17T22:59:49.058775",
+    "updateDate": "2025-03-17T22:59:49.058781",
+    "address": {
+      "id": "12deaf27-de68-4507-b92e-298731cad30e",
+      "enabled": true,
+      "createDate": "2025-03-17T22:59:49.048202",
+      "updateDate": "2025-03-17T22:59:49.04821",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    "propertyStatus": "UNVERIFIED",
+    "listingType": "FOR_SALE",
+    "propertyType": "TOWN_HOUSE",
+    "images": [
+      "https://images.unsplash.com/photo-1463741408080-b210ee5227dc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dG93biUyMGhvdXNlfGVufDB8fDB8fHww",
+      "https://media.istockphoto.com/id/182159305/photo/modern-bedroom.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZR6Pqd5qXMLwtu3nriDY5LVFqjyVnKNO9kf37weeKH0="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Sanjaya",
+      "lastName": "Sapkota",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  },
+  {
+    "id": "ce795f43-23a2-4da7-8144-1004998b2360",
+    "enabled": true,
+    "createDate": "2025-03-17T22:53:41.181501",
+    "updateDate": "2025-03-17T22:53:41.18151",
+    "address": {
+      "id": "f43839d1-47b2-4455-9912-c0827169bdb2",
+      "enabled": true,
+      "createDate": "2025-03-17T22:53:41.173608",
+      "updateDate": "2025-03-17T22:53:41.173623",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 10.0,
+    "bathrooms": 2.0,
+    "bedrooms": 2,
+    "price": 111110.0,
+    "propertyStatus": "PENDING",
+    "listingType": "FOR_SALE",
+    "propertyType": "HOUSE",
+    "images": [
+      "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2VzfGVufDB8fDB8fHww",
+      "https://images.unsplash.com/photo-1531383339897-f369f6422e40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG93biUyMGhvdXNlJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
+      "https://media.istockphoto.com/id/520614902/photo/bright-modern-contemporary-kitchen-and-dinning-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=qrMT-I1SfzV_q1MO-_GiSP1imIoSTEQG9MGbxnWWglw=",
+      "https://media.istockphoto.com/id/533722563/photo/modern-kitchen-interior-design.jpg?s=612x612&w=0&k=20&c=ygmHd6lELHkhmHbLonRvpWGOkeK0UhurN2cBH6W-Wng="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Orion",
+      "lastName": "Blackstock",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  },
+  {
+    "id": "f9042cf5-cb7b-47fd-bf06-d6218c8bb9e4",
+    "enabled": true,
+    "createDate": "2025-03-17T23:05:07.980626",
+    "updateDate": "2025-03-17T23:05:07.980635",
+    "address": {
+      "id": "b114d846-a854-424e-96b3-389250e61e19",
+      "enabled": true,
+      "createDate": "2025-03-17T23:05:07.962855",
+      "updateDate": "2025-03-17T23:05:07.962864",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    "propertyStatus": "SOLD",
+    "listingType": "FOR_RENT",
+    "propertyType": "LAND",
+    "images": [
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+      "https://media.istockphoto.com/id/863542630/photo/summer-sunset-with-a-red-barn-in-rural-montana-and-rocky-mountains.jpg?s=612x612&w=0&k=20&c=c0-_YxwHBEbwL0SpzPrF_mWGlEtX2GQzPaezpn_o0EY="      
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Sanjaya",
+      "lastName": "Sapkota",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  },
+  {
+    "id": "f9042cf5-cb7b-47fd-bf06-d6218c8bb9e2",
+    "enabled": true,
+    "createDate": "2025-03-17T23:05:07.980626",
+    "updateDate": "2025-03-17T23:05:07.980635",
+    "address": {
+      "id": "b114d846-a854-424e-96b3-389250e61e19",
+      "enabled": true,
+      "createDate": "2025-03-17T23:05:07.962855",
+      "updateDate": "2025-03-17T23:05:07.962864",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    "listingType": "FOR_SALE",
+    "propertyStatus": "AVAILABLE",
+    "propertyType": "LAND",
+    "images": [
+      "https://images.unsplash.com/photo-1602794944783-227f826f9d12?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGxhbmR8ZW58MHx8MHx8fDA%3D",
+      "https://media.istockphoto.com/id/1796879087/photo/aerial-drone-shot-of-construction-site-with-excavators-on-sunny-day-diverse-team-of-real.jpg?s=612x612&w=0&k=20&c=_Z3Tyg11PB-ecJntkQ71CEQQnuE9cioNaVwtQbvjHfE=",
+      "https://media.istockphoto.com/id/904559680/photo/this-farm-is-my-pride-and-joy.jpg?s=612x612&w=0&k=20&c=yZPOBZSqnHV4zF66ahEoXrPMwwi3Emh1XSNhXyjJNzg="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Hadijah",
+      "lastName": "Kyampeire",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  },
+  {
+    "id": "f9042cf5-cb7b-47fd-bf06-d6218c8bb9e9",
+    "enabled": true,
+    "createDate": "2025-03-17T23:05:07.980626",
+    "updateDate": "2025-03-17T23:05:07.980635",
+    "address": {
+      "id": "b114d846-a854-424e-96b3-389250e61e19",
+      "enabled": true,
+      "createDate": "2025-03-17T23:05:07.962855",
+      "updateDate": "2025-03-17T23:05:07.962864",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    "listingType": "FOR_SALE",
+    "propertyStatus": "AVAILABLE",
+    "propertyType": "CONDO",
+    "images": [
+      "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uZG98ZW58MHx8MHx8fDA%3D",
+      "https://images.unsplash.com/photo-1531383339897-f369f6422e40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG93biUyMGhvdXNlJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
+      "https://media.istockphoto.com/id/1188606673/photo/townhouse-with-spacious-living-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=WJNPIjLDyzyi8_ZMfMAQ80sPxN27HUNlTaGbREZ26h4="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Hadijah",
+      "lastName": "Kyampeire",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+      },
+  },
+  {
+    "id": "f9042cf5-cb7b-47fd-bf06-d6218c8bb9e6",
+    "enabled": true,
+    "createDate": "2025-03-17T23:05:07.980626",
+    "updateDate": "2025-03-17T23:05:07.980635",
+    "address": {
+      "id": "b114d846-a854-424e-96b3-389250e61e19",
+      "enabled": true,
+      "createDate": "2025-03-17T23:05:07.962855",
+      "updateDate": "2025-03-17T23:05:07.962864",
+      "street": "1000 N 4th St",
+      "city": "Fairfield",
+      "state": "Iowa",
+      "zip": "1234",
+      "country": "US"
+    },
+    "area": 100.0,
+    "bathrooms": 2.5,
+    "bedrooms": 2,
+    "price": 100000.0,
+    listingType: "FOR_SALE",
+    "propertyStatus": "AVAILABLE",
+    "propertyType": "APARTMENT",
+    "images": [
+      "https://images.unsplash.com/photo-1595330449916-e7c3e1962bd3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50JTIwYnVpbGRpbmd8ZW58MHx8MHx8fDA%3D",
+      "https://media.istockphoto.com/id/520614902/photo/bright-modern-contemporary-kitchen-and-dinning-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=qrMT-I1SfzV_q1MO-_GiSP1imIoSTEQG9MGbxnWWglw=",
+      "https://media.istockphoto.com/id/527528336/photo/interior-staircase-and-contemporary-architectural-design.jpg?s=612x612&w=0&k=20&c=ZLCkxmFVFsPA6C_OlSoZlDC41YIGG-Hg-pOpFjY3i4s="
+    ],
+    "owner": {
+      "id": "ec35ef60-e1a2-462e-957c-359bb5934d77",
+      "enabled": true,
+      "createDate": "2025-03-17T22:40:22.531157",
+      "updateDate": "2025-03-17T22:40:22.531165",
+      "firstName": "Hadijah",
+      "lastName": "Kyampeire",
+      "email": "owner@gmail.com",
+      "phoneNumber": "123 567 890",
+      "userType": "OWNER",
+      "address": {
+        "id": "718fc57d-e00f-45a2-aaef-e2c7b782dec3",
+        "enabled": true,
+        "createDate": "2025-03-17T22:40:22.438639",
+        "updateDate": "2025-03-17T22:40:22.438653",
+        "street": "1000 N 4th St",
+        "city": "Fairfield",
+        "state": "Iowa",
+        "zip": "1234",
+        "country": "US"
+      },
+      "verifiedBy": null
+    }
+  }
+]

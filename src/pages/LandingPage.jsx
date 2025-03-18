@@ -3,6 +3,7 @@ import AnonymousLayout from "../layouts/AnonymousLayout";
 import { Typography, Box, TextField, Button } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import bg from "../assets/background-image.jpg"
+import PropertiesList from "./landing/PropertiesList";
 
 const LandingPage = () => {
   return (
@@ -56,6 +57,9 @@ const LandingPage = () => {
             </Button>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ mt: 14 }}>
+        <PropertiesList />
       </Box>
     </AnonymousLayout>
   );
