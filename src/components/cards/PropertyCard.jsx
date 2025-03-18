@@ -12,9 +12,9 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 
 const statusColors = {
-  FOR_SALE: "green",
+  AVAILABLE: "green",
   SOLD: "red",
-  RENTED: "blue",
+  CONTINGENT: "blue",
   PENDING: "orange",
 };
 
@@ -25,7 +25,6 @@ const PropertyCard = ({ property }) => {
     "https://images.unsplash.com/photo-1531383339897-f369f6422e40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG93biUyMGhvdXNlJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
     "https://media.istockphoto.com/id/520614902/photo/bright-modern-contemporary-kitchen-and-dinning-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=qrMT-I1SfzV_q1MO-_GiSP1imIoSTEQG9MGbxnWWglw="
   ];
-  console.log(property)
   const theme = useTheme();
   const [liked, setLiked] = useState(false);
 

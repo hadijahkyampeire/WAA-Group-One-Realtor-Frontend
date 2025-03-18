@@ -1,24 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { properties } from '../../data/properties'
-import { fetchAllProperties } from '../../api/properties';
+import React from 'react'
 import PropertyCard from '../../components/cards/PropertyCard';
 import { Typography, Container } from '@mui/material';
 
-function PropertiesList() {
-  const [propertyData, setPropertyData] = useState(properties);
-
-  const fetchProperties = () => {
-    fetchAllProperties()
-      .then(res => {
-        console.log(res.data)
-        setPropertyData([...propertyData, ...res.data])
-      })
-      .catch(err => console.error(err || "Error "))
-  }
-
-  useEffect(() => {
-    fetchProperties();
-  }, []);
+function PropertiesList({ properties }) {
 
   return (
     <Container 
@@ -29,8 +13,8 @@ function PropertiesList() {
         flexWrap: "wrap",
         maxWidth: "1460px !important"
         }}>
-      {propertyData.length > 0 
-        ? propertyData.map((property) => <PropertyCard key={property.id} property={property}/>)
+      {properties.length > 0 
+        ? properties.map((property) => <PropertyCard key={property.id} property={property}/>)
         : <Typography>No Properties found please check you filters!</Typography>}
     </Container>
   )
