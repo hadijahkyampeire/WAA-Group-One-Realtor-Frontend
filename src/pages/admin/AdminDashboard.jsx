@@ -1,12 +1,13 @@
-import React from 'react'
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout'
+import React from "react";
+import AuthenticatedLayout from "../../layouts/AuthenticatedLayout";
+import { Admin } from "./Admin";
 
 function AdminDashboard() {
   return (
     <AuthenticatedLayout>
-      <h1>AdminDashboard</h1>
+      <Admin />
     </AuthenticatedLayout>
-  )
+  );
 }
 
-export default AdminDashboard
+export default AdminDashboard;
