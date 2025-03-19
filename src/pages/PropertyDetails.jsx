@@ -13,6 +13,7 @@ const PropertyDetails = () => {
   const { id } = useParams();
   const [propertyDetails, setPropertyDetails] = useState({});
   const [open, setOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
   const handleClose = () => setOpen(false);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ const PropertyDetails = () => {
   if (!property) return <Typography>Property Not Found</Typography>;
 
   const canMakeAnOffer = property.propertyStatus === 'AVAILABLE' || property.propertyStatus === 'PENDING';
+  const hasOfferPrivilages = user && user.userType === "CUSTOMER";
 
   const images = property?.images || fallbackImages
   return (
@@ -69,13 +71,18 @@ const PropertyDetails = () => {
               fontWeight: "bold",
             }}
           />
-          {canMakeAnOffer &&  <Tooltip title={!user ? "Login to proceed with the offer" : ""} arrow>
-        <span>
-          <Button disabled={!user} variant="contained" onClick={handleOpen}>
-            Make an Offer
-          </Button>
-        </span>
-      </Tooltip>}
+          {hasOfferPrivilages && (
+            <IconButton onClick={() => setLiked(!liked)} color="primary">
+            {liked ? <Favorite color="error" /> : <FavoriteBorder />}
+          </IconButton>)}
+          {(canMakeAnOffer && hasOfferPrivilages) &&  (
+            <Tooltip title={!user ? "Login to proceed with the offer" : ""} arrow>
+              <span>
+                <Button disabled={!user} variant="contained" onClick={handleOpen}>
+                  Make an Offer
+                </Button>
+              </span>
+            </Tooltip>)}
         </Box>
         <Typography variant="h4" sx={{ mt: 2 }}>${property?.price?.toLocaleString()}</Typography>
         <Typography variant="h6" color="textSecondary">
@@ -95,6 +102,9 @@ const PropertyDetails = () => {
         <Typography variant="h6" sx={{ mt: 3, fontWeight: "bold" }}>Offers</Typography>
         <Typography>
             {property.offers?.length || 0} offer(s)
+        </Typography>
+        <Typography variant="caption" display="block" mt={1} color="textSecondary">
+          Owned by: {property.owner.firstName} {property.owner.lastName}
         </Typography>
         <AddOfferComponent open={open} handleClose={handleClose} property={property} />
       </Container>

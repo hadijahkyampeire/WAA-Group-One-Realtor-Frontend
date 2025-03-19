@@ -26,7 +26,6 @@ const OfferHistoryList = () => {
     }
   }
 
-
   return (
     <div>
       <Typography>Your Offer History</Typography>

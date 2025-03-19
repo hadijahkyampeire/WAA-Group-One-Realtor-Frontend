@@ -40,6 +40,7 @@ const PropertyCard = ({ property }) => {
     window.open(`/properties/${property.id}`, "_blank");
   };
 
+  const hasOfferPrivilages = user && user.userType === "CUSTOMER";
   return (
     <Card 
       sx={{ 
@@ -74,7 +75,7 @@ const PropertyCard = ({ property }) => {
           <Typography variant="h6" fontWeight="bold">
             ${property?.price?.toLocaleString()}
           </Typography>
-          {user && <IconButton onClick={() => setLiked(!liked)} color="primary">
+          {hasOfferPrivilages && <IconButton onClick={() => setLiked(!liked)} color="primary">
             {liked ? <Favorite color="error" /> : <FavoriteBorder />}
           </IconButton>}
           <IconButton onClick={handleOpenInNewTab}>
