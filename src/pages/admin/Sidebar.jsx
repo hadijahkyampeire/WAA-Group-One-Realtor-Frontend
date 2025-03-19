@@ -7,6 +7,8 @@ export const Sidebar = ({ setActiveTab }) => {
       sx={{
         bgcolor: "#f4f4f4",
         padding: 2,
+        minHeight: "90vh",
+        minWidth: "25vh",
       }}
     >
       <List sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
