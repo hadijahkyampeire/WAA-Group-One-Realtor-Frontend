@@ -40,7 +40,6 @@ export const PropertiesTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
               <TableCell>Property Type</TableCell>
               <TableCell>Address</TableCell>
               <TableCell>Area (sq ft)</TableCell>
@@ -55,7 +54,6 @@ export const PropertiesTable = () => {
           <TableBody>
             {properties.map((property) => (
               <TableRow key={property.id}>
-                <TableCell>{property.id}</TableCell>
                 <TableCell>{property.propertyType}</TableCell>
                 <TableCell>
                   {property.address.street}, {property.address.city},{" "}

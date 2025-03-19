@@ -48,7 +48,6 @@ export const UsersTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Status</TableCell>
@@ -58,8 +57,7 @@ export const UsersTable = () => {
           <TableBody>
             {customers.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.name}</TableCell>
+                <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.active ? "Active" : "Inactive"}</TableCell>
                 <TableCell>

@@ -9,18 +9,11 @@ export const Admin = () => {
   const [activeTab, setActiveTab] = useState("properties");
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Dashboard</Typography>
-        </Toolbar>
-      </AppBar>
-      <div style={{ display: "flex" }}>
-        <Sidebar setActiveTab={setActiveTab} />
-        <Container style={{ marginLeft: 10, marginTop: 20 }}>
-          {activeTab === "properties" ? <PropertiesTable /> : <UsersTable />}
-        </Container>
-      </div>
-    </>
+    <div style={{ display: "flex" }}>
+      <Sidebar setActiveTab={setActiveTab} />
+      <Container style={{ marginLeft: 10, marginTop: 20 }}>
+        {activeTab === "properties" ? <PropertiesTable /> : <UsersTable />}
+      </Container>
+    </div>
   );
 };
