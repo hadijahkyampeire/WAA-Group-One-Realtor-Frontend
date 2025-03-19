@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchProperties } from "../../../api/admin";
+import { fetchProperties } from "../../api/admin";
 
 export const getProperties = createAsyncThunk(
   "properties/getProperties",

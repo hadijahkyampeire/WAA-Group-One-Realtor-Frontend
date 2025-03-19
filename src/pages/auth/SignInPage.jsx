@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../store/slices/authSlices';
+import { loginSuccess } from '../../store/slices/authSlices';
 import { useNavigate, Link } from 'react-router-dom';
 import { TextField, Button, CircularProgress, Box, Typography, useTheme } from '@mui/material';
-import { login } from '../api/auth';
-import NavBarLayout from '../layouts/NavBarLayout';
+import { login } from '../../api/auth';
+import NavBarLayout from '../../layouts/NavBarLayout';
 
 const SignInPage = () => {
     const theme = useTheme();

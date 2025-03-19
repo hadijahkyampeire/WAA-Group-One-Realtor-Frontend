@@ -41,7 +41,7 @@ const AddOfferComponent = ({ property = {}, open, handleClose, offerDetails }) =
     <div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ width: 400, bgcolor: "white", p: 4, mx: "auto", mt: "20vh", borderRadius: 2 }}>
-          {/* <h2>Submit an Offer for {property.propertyType} in {property.address.street}, {property.address.city}, {property.address.state}, {property.address.zipcode}</h2> */}
+          <h2>Submit an Offer for {property?.propertyType} in {property?.address?.street}, {property?.address?.city}, {property?.address?.state}, {property?.address?.zipcode}</h2>
           <TextField
             fullWidth
             label="$ Price Offer"

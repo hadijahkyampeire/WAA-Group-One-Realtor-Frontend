@@ -16,7 +16,7 @@ const AnonymousNavbar = () => {
         zIndex: 1300
         }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <BrowserLink to="/properties"><img src={logo} width={30} height={30} alt="Honss"/></BrowserLink>
+        <BrowserLink to="/"><img src={logo} width={30} height={30} alt="Honss"/></BrowserLink>
         <Typography variant="h6" sx={{ fontWeight: "bold", color: theme.palette.primary.main }}>
           Honss Real Estates
         </Typography>

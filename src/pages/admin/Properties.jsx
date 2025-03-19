@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties } from "../../store/reducers/admin/propertiesSlice";
+import { getProperties } from "../../store/slices/propertiesSlice";
 import {
   selectProperties,
   selectPropertiesLoading,

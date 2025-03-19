@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { PropertiesTable } from "./Properties";
 import { UsersTable } from "./Users";
 import { Sidebar } from "./Sidebar";
-import { Route, Routes } from "react-router-dom";
+import { OwnersTable } from "./Owners";
 
 export const Admin = () => {
   const [activeTab, setActiveTab] = useState("properties");
@@ -12,7 +12,11 @@ export const Admin = () => {
     <div style={{ display: "flex" }}>
       <Sidebar setActiveTab={setActiveTab} />
       <Container style={{ marginLeft: 10, marginTop: 20 }}>
-        {activeTab === "properties" ? <PropertiesTable /> : <UsersTable />}
+        {activeTab === "properties" 
+        ? <PropertiesTable /> 
+        : activeTab === "owners" 
+        ? <OwnersTable /> 
+        : <UsersTable />}
       </Container>
     </div>
   );
