@@ -20,7 +20,6 @@ const LandingPage = () => {
     maxPrice: searchParams.get("maxPrice") || "",
   });
 
-  console.log(filters)
   const [filteredProperties, setFilteredProperties] = useState([...properties]);
   
   const fetchProperties = async() => {
