@@ -8,7 +8,14 @@ const AnonymousNavbar = () => {
   const theme = useTheme();
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper, boxShadow: "none" }}>
+    <AppBar 
+      position="fixed" 
+      sx={{ 
+        backgroundColor: theme.palette.background.paper, 
+        boxShadow: "none", 
+        top: 0, 
+        zIndex: 1300
+        }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <img src={logo} width={30} height={30} alt="Honss"/>
         <Typography variant="h6" sx={{ fontWeight: "bold", color: theme.palette.primary.main }}>
