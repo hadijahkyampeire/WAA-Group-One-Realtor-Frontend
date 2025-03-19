@@ -8,6 +8,7 @@ import LandingPage from "../pages/LandingPage";
 import SignInPage from "../pages/SignInPage";
 import PropertyDetails from "../pages/PropertyDetails";
 import { Admin } from "../pages/admin/Admin";
+import CreateProperty from "../pages/properties/CreateProperty";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/properties/:id" element={<PropertyDetails />} />
+        <Route path="/properties/create" element={<CreateProperty />} />
       </Routes>
     </Router>
   );
