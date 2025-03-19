@@ -6,7 +6,6 @@ import {
   Select,
   InputLabel,
   FormControl,
-  Box,
   Typography,
   Paper,
   Grid2,
@@ -15,23 +14,19 @@ import NavBarLayout from "../../layouts/NavBarLayout";
 import { addProperty } from "../../api/properties";
 import { useNavigate } from "react-router-dom";
 
+const initialProperty = {
+  address: { street: "", city: "", state: "", zip: "", country: "US"},
+  area: "",
+  bathrooms: "",
+  bedrooms: "",
+  price: "",
+  listingType: "FOR_SALE",
+  propertyType: "HOUSE",
+};
+
 const CreateProperty = () => {
   const navigate = useNavigate();
-  const [property, setProperty] = useState({
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
-      country: "US",
-    },
-    area: "",
-    bathrooms: "",
-    bedrooms: "",
-    price: "",
-    listingType: "FOR_SALE",
-    propertyType: "HOUSE",
-  });
+  const [property, setProperty] = useState({...initialProperty});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -128,10 +123,10 @@ const CreateProperty = () => {
               <Select name="listingType" value={property.listingType} onChange={handleChange} required>
                 <MenuItem value="FOR_SALE">For Sale</MenuItem>
                 <MenuItem value="FOR_RENT">For Rent</MenuItem>
-                <MenuItem value="SOLD">Sold</MenuItem>
+                {/* <MenuItem value="SOLD">Sold</MenuItem>
                 <MenuItem value="PENDING">Pending</MenuItem>
                 <MenuItem value="CONTINGENT">Contingent</MenuItem>
-                <MenuItem value="UNVERIFIED">Unverified</MenuItem>
+                <MenuItem value="UNVERIFIED">Unverified</MenuItem> */}
               </Select>
             </FormControl>
           </Grid2>
