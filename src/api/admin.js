@@ -5,6 +5,15 @@ export const fetchCustomers = async () => {
   return response.data;
 };
 
+export const fetchOwners = async () => {
+  const response = await api.get("/admin/owners");
+  return response.data;
+};
+
+export const verifyUser = async (id) => {
+  await api.post(`/admin/owners/${id}/verify`);
+};
+
 export const activateUser = async (id) => {
   await api.post(`/admin/users/${id}/activate`);
 };

@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getOwners, toggleUserStatus, verifyOwner } from "../../store/slices/ownersSlice";
 import {
-  getCustomers,
-  toggleUserStatus,
-} from "../../store/slices/customersSlice";
-import {
-  selectCustomers,
-  selectCustomersLoading,
-  selectCustomersError,
+  selectOwners,
+  selectOwnersLoading,
+  selectOwnersError,
 } from "../../store/selectors/adminSelectors";
 import {
   Container,
@@ -22,18 +19,22 @@ import {
   Typography,
 } from "@mui/material";
 
-export const UsersTable = () => {
+export const OwnersTable = () => {
   const dispatch = useDispatch();
-  const customers = useSelector(selectCustomers);
-  const loading = useSelector(selectCustomersLoading);
-  const error = useSelector(selectCustomersError);
+  const owners = useSelector(selectOwners);
+  const loading = useSelector(selectOwnersLoading);
+  const error = useSelector(selectOwnersError);
 
   useEffect(() => {
-    dispatch(getCustomers());
+    dispatch(getOwners());
   }, [dispatch]);
 
   const handleToggleStatus = (id, active) => {
     dispatch(toggleUserStatus({ id, active }));
+  };
+
+  const handleVerify = (id, verified) => {
+    dispatch(verifyOwner({ id, verified }));
   };
 
   if (loading) return <Typography>Loading...</Typography>;
@@ -42,7 +43,7 @@ export const UsersTable = () => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Customers
+        Owners
       </Typography>
       <TableContainer component={Paper}>
         <Table>
@@ -51,21 +52,27 @@ export const UsersTable = () => {
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Verified</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.map((user) => (
+            {owners.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.active ? "Active" : "Inactive"}</TableCell>
+                <TableCell>{user.verified ? "Verified" : "Unverified"}</TableCell>
                 <TableCell>
                   <Button
                     onClick={() => handleToggleStatus(user.id, user.active)}
                   >
                     {user.active ? "Deactivate" : "Activate"}
                   </Button>
+                  {!user.verified && 
+                    <Button onClick={() => handleVerify(user.id, user.verified)}>
+                      Verify
+                    </Button>}
                 </TableCell>
               </TableRow>
             ))}

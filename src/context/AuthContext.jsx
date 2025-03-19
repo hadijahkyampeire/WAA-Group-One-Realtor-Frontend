@@ -7,7 +7,8 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const dispatch = useDispatch();
-    const { user, token } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (token) {
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, [token, dispatch]);
 
-    return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ user, token }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

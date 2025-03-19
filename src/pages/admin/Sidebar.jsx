@@ -7,7 +7,7 @@ export const Sidebar = ({ setActiveTab }) => {
       sx={{
         bgcolor: "#f4f4f4",
         padding: 2,
-        minHeight: "90vh",
+        minHeight: "100vh",
         minWidth: "25vh",
       }}
     >
@@ -25,6 +25,13 @@ export const Sidebar = ({ setActiveTab }) => {
           onClick={() => setActiveTab("customers")}
         >
           <ListItemText primary="Customers" />
+        </ListItem>
+        <ListItem
+          sx={{ cursor: "pointer" }}
+          button
+          onClick={() => setActiveTab("owners")}
+        >
+          <ListItemText primary="Owners" />
         </ListItem>
       </List>
     </Box>

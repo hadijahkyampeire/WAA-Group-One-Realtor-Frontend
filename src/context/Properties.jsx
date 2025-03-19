@@ -108,7 +108,7 @@ export const PropertiesProvider = ({ children }) => {
     setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
   };
 
-  const filterVerifiedOwnersProperties = filteredProperties.filter(p => p.owner.verifiedBy !== null && p.owner.enabled === true)
+  const filterVerifiedOwnersProperties = filteredProperties.filter(p => p.owner.verified === true && p.owner.enabled === true)
   return (
     <PropertiesContext.Provider
       value={{

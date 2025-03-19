@@ -17,3 +17,11 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
+
+export const getFileUrl = (fileUrl) => {
+  if(fileUrl!==undefined){
+    const baseUrl="https://pms-bucket-temp.s3.us-east-1.amazonaws.com/";
+    return baseUrl + fileUrl;
+  }
+  return undefined;
+};

@@ -67,7 +67,6 @@ const CreateProperty = () => {
         Create Property
       </Typography>
       <form onSubmit={handleSubmit}>
-        {/* Address Fields */}
         <TextField
           fullWidth label="Street" name="address.street"
           value={property.address.street} onChange={handleChange} margin="normal" required

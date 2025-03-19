@@ -44,7 +44,7 @@ const AuthenticatedNavbar = () => {
             </div>
             <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
               <Button onClick={goToDashboard} color='white'>Go To Dashboard</Button>
-              <Typography>Welcome, {user.userType} {user.firstName}</Typography>
+              <Typography>Welcome, {user.firstName} (<span>{user.userType}</span>)</Typography>
               <Button color="inherit" variant="outlined" onClick={handleLogout}>Logout</Button>
             </div>
           </Toolbar>

@@ -6,12 +6,13 @@ import {
   Typography, 
   IconButton, 
   Box, 
-  Chip 
+  Chip,
 } from "@mui/material";
 import { Favorite, FavoriteBorder, OpenInNew } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { getFileUrl } from "../../api";
+import PropertyDetailsModal from "./PropertyDetailsModal";
 
 const statusColors = {
   AVAILABLE: "green",
@@ -21,19 +22,13 @@ const statusColors = {
 };
 
 const PropertyCard = ({ property }) => {
-  const navigate = useNavigate();
   const { user } = useAuth();
-  const defaultImages = [
-    "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uZG98ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1531383339897-f369f6422e40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG93biUyMGhvdXNlJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
-    "https://media.istockphoto.com/id/520614902/photo/bright-modern-contemporary-kitchen-and-dinning-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=qrMT-I1SfzV_q1MO-_GiSP1imIoSTEQG9MGbxnWWglw="
-  ];
+  const defaultImages = "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uZG98ZW58MHx8MHx8fDA%3D%22"
   const theme = useTheme();
   const [liked, setLiked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenDetails = () => {
-    navigate(`/properties/${property.id}`);
-  };
+  const handleClose = () => setIsModalOpen(false);
 
   const handleOpenInNewTab = (e) => {
     e.stopPropagation();
@@ -42,7 +37,9 @@ const PropertyCard = ({ property }) => {
 
   const hasOfferPrivilages = user && user.userType === "CUSTOMER";
   return (
+    <>
     <Card 
+      onClick={() => setIsModalOpen(true)}
       sx={{ 
         maxWidth: 550, 
         width: 325, 
@@ -51,12 +48,11 @@ const PropertyCard = ({ property }) => {
         position: "relative",
         cursor: "pointer"
       }} 
-      onClick={handleOpenDetails}
       >
       <CardMedia 
         component="img" 
         height="200" 
-        image={property?.images?.[0] || defaultImages[0]} 
+        image={getFileUrl(property?.images?.[0]) || defaultImages} 
         alt="Property Image" />
 
       <Chip
@@ -111,6 +107,11 @@ const PropertyCard = ({ property }) => {
         </Typography>
       </CardContent>
     </Card>
+    <PropertyDetailsModal 
+      id={property.id}
+      open={isModalOpen} 
+      handleClose={handleClose}/>
+  </>
   );
 };
 

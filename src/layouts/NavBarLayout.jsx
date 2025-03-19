@@ -5,10 +5,10 @@ import AnonymousNavbar from '../components/navbar/AnonymousNavBar'
 import AuthenticatedNavbar from '../components/navbar/AuthenticatedNavBar'
 
 function NavBarLayout({ children }) {
-  const { user } = useAuth()
+  const { user, token } = useAuth();
   return (
     <Box>
-      {user ? <AuthenticatedNavbar /> : <AnonymousNavbar />}
+      {(user && token) ? <AuthenticatedNavbar /> : <AnonymousNavbar />}
       <Box component="main" sx={{ padding: "20px", minHeight: "100vh", mt: 8 }}>
         {children}
       </Box>

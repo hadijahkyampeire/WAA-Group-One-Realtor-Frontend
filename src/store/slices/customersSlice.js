@@ -3,7 +3,7 @@ import {
   fetchCustomers,
   activateUser,
   deactivateUser,
-} from "../../../api/admin";
+} from "../../api/admin";
 
 export const getCustomers = createAsyncThunk(
   "customers/getCustomers",

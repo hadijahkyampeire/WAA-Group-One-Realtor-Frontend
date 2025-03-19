@@ -32,6 +32,10 @@ const OfferHistoryList = () => {
       <Table sx={{ mt: 4 }}>
         <TableHead>
           <TableRow>
+            <TableCell>Property Price</TableCell>
+            <TableCell>Property Type</TableCell>
+            <TableCell>Address</TableCell>
+            <TableCell>Owned By</TableCell>
             <TableCell>Amount Offered</TableCell>
             <TableCell>Status</TableCell>
             <TableCell>Actions</TableCell>
@@ -39,18 +43,31 @@ const OfferHistoryList = () => {
         </TableHead>
         <TableBody>
           {offers.length > 0 ? offers?.map((offer) => (
+            <>
             <TableRow key={offer.id}>
-              <TableCell>${offer.amountOffered}</TableCell>
+              <TableCell>${offer?.property?.price}</TableCell>
+              <TableCell>{offer.property?.propertyType}</TableCell>
+              <TableCell>
+                <>{offer.property?.address?.street}, {offer.property?.address?.state}, {offer.property?.address?.city}</>
+              </TableCell>
+              <TableCell>{offer.property.owner.firstName} {offer.property.owner.lastName}</TableCell>
+              <TableCell sx={{ color: "orange"}}>${offer.amountOffered}</TableCell>
               <TableCell>{offer.offerStatus}</TableCell>
               <TableCell>
                 <IconButton color="primary" onClick={() => setOpenEditModal(offer)}><EditIcon /></IconButton>
                 <IconButton color="error" onClick={() => handleCancelOffer(offer)}><CancelIcon /></IconButton>
               </TableCell>
             </TableRow>
+            <AddOfferComponent 
+                property={offer?.property}
+                open={openEditModal} 
+                offerDetails={openEditModal} 
+                handleClose={() => setOpenEditModal(null)} />
+            </>
           )): <TableRow><TableCell>No offers made yet</TableCell></TableRow>}
         </TableBody>
       </Table>
-     <AddOfferComponent open={openEditModal} offerDetails={openEditModal} handleClose={() => setOpenEditModal(null)} />
+     
     </div>
   );
 };
