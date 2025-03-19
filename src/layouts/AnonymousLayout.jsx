@@ -2,10 +2,10 @@ import React from "react";
 import { Box } from "@mui/material";
 import AnonymousNavbar from "../components/navbar/AnonymousNavBar";
 
-const AnonymousLayout = ({ children }) => {
+const AnonymousLayout = ({ children, showLoginButton }) => {
   return (
     <Box>
-      <AnonymousNavbar />
+      <AnonymousNavbar showLoginButton={showLoginButton} />
       <Box component="main" sx={{ padding: "20px", minHeight: "100vh", mt: 8 }}>
         {children}
       </Box>

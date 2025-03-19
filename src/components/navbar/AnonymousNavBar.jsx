@@ -1,10 +1,10 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import logo from "../../assets/logo.png"
-import { Link } from "react-router-dom";
+import { Link as BrowserLink } from "react-router-dom";
 
-const AnonymousNavbar = () => {
+const AnonymousNavbar = ({ showLoginButton = true }) => {
   const theme = useTheme();
 
   return (
@@ -17,14 +17,15 @@ const AnonymousNavbar = () => {
         zIndex: 1300
         }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <img src={logo} width={30} height={30} alt="Honss"/>
+        <BrowserLink to="/properties"><img src={logo} width={30} height={30} alt="Honss"/></BrowserLink>
         <Typography variant="h6" sx={{ fontWeight: "bold", color: theme.palette.primary.main }}>
           Honss Real Estates
         </Typography>
 
-        <Button component={Link} to="/signin" variant="contained" color="primary">
+        {showLoginButton && 
+        <Button component={BrowserLink} to="/signin" variant="contained" color="primary">
           Sign In
-        </Button>
+        </Button>}
       </Toolbar>
     </AppBar>
   );

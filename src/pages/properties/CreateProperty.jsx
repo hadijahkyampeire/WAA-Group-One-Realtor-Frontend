@@ -11,9 +11,12 @@ import {
   Paper,
   Grid2,
 } from "@mui/material";
-import axios from "axios";
+import AuthenticatedLayout from "../../layouts/AuthenticatedLayout";
+import { addProperty } from "../../api/properties";
+import { useNavigate } from "react-router-dom";
 
 const CreateProperty = () => {
+  const navigate = useNavigate();
   const [property, setProperty] = useState({
     address: {
       street: "",
@@ -46,16 +49,18 @@ const CreateProperty = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const options = {
-      headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvd25lckBnbWFpbC5jb20iLCJpYXQiOjE3NDIzMjgxNzYsImV4cCI6MTc0MjMzMTc3Nn0.xlMGdnpC7i0bZRyJ40mXWXTp-Q1cQoOePoun1tvO0A4" },
-    };
-    
-    axios.post("http://localhost:8080/properties", property, options).then((res) => {
+    addProperty(property)
+    .then((res) => {
       console.log("Property created", res.data);
+      navigate("/owner/dashboard")
+    })
+    .catch((error) => {
+      console.error("Error creating property", error);
     });
   };
 
   return (
+    <AuthenticatedLayout>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <Paper elevation={4} sx={{ maxWidth: 500, padding: 2, borderRadius: 2 }}>
       <Typography variant="h5" fontWeight="bold" gutterBottom>
@@ -149,6 +154,7 @@ const CreateProperty = () => {
       </form>
     </Paper>
     </div>
+    </AuthenticatedLayout>
   );
 };
 
