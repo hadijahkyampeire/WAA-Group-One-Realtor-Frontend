@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout'
 import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { fetchOwnerProperties } from '../../api/properties';
+import NavBarLayout from '../../layouts/NavBarLayout';
 
 function OwnerDashboard() {
   const [properties, setProperties] = useState([]);
@@ -19,11 +19,11 @@ function OwnerDashboard() {
 
   console.log(properties, 'pp')
   return (
-    <AuthenticatedLayout>
+    <NavBarLayout>
     <h1>Your Properties</h1>
     
     <Button component={Link} to="/properties/create">Add Property</Button>
-  </AuthenticatedLayout>
+  </NavBarLayout>
   )
 }
 

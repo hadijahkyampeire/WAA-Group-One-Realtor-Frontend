@@ -1,12 +1,12 @@
 import React from "react";
-import AuthenticatedLayout from "../../layouts/AuthenticatedLayout";
+import NavBarLayout from "../../layouts/NavBarLayout";
 import { Admin } from "./Admin";
 
 function AdminDashboard() {
   return (
-    <AuthenticatedLayout>
+    <NavBarLayout>
       <Admin />
-    </AuthenticatedLayout>
+    </NavBarLayout>
   );
 }
 

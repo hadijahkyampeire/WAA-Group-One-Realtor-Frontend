@@ -7,7 +7,8 @@ const Filters = ({ filters, onFilterChange }) => {
     <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
     <TextField
       select
-      sx={{ width: "12rem" }}
+      size="sm"
+      sx={{ width: "10rem" }}
       label="Property Status"
       value={filters.propertyStatus || ""}
       onChange={(e) => onFilterChange("propertyStatus", e.target.value)}
@@ -21,7 +22,7 @@ const Filters = ({ filters, onFilterChange }) => {
 
     <TextField
       select
-      sx={{ width: "12rem" }}
+      sx={{ width: "10rem" }}
       label="Listing Type"
       value={filters.listingType}
       onChange={(e) => onFilterChange("listingType", e.target.value)}
@@ -35,7 +36,7 @@ const Filters = ({ filters, onFilterChange }) => {
 
     <TextField
       select
-      sx={{ width: "12rem" }}
+      sx={{ width: "10rem" }}
       label="Property Type"
       value={filters.propertyType}
       onChange={(e) => onFilterChange("propertyType", e.target.value)}

@@ -4,7 +4,7 @@ import { loginSuccess } from '../store/slices/authSlices';
 import { useNavigate, Link } from 'react-router-dom';
 import { TextField, Button, CircularProgress, Box, Typography, useTheme } from '@mui/material';
 import { login } from '../api/auth';
-import AnonymousLayout from '../layouts/AnonymousLayout';
+import NavBarLayout from '../layouts/NavBarLayout';
 
 const SignInPage = () => {
     const theme = useTheme();
@@ -25,7 +25,6 @@ const SignInPage = () => {
 
           if (data?.user) {
             const userType = data?.user?.userType?.toUpperCase();
-            console.log("User Type:", userType);
 
             if (userType === 'ADMIN') {
                 console.log("Navigating to /admin/dashboard");
@@ -51,7 +50,7 @@ const SignInPage = () => {
     };
 
     return (
-        <AnonymousLayout showLoginButton={false}>
+        <NavBarLayout>
           <Box 
             sx={{ 
               backgroundColor: "white", 
@@ -73,7 +72,7 @@ const SignInPage = () => {
             </form>
             <Typography sx={{ textAlign: "center", mt: 4 }}>Don't have an account yet? <Link to="/register">Create an Account</Link></Typography>
           </Box>
-        </AnonymousLayout>
+        </NavBarLayout>
     );
 };
 

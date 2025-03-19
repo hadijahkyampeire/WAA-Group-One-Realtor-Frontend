@@ -4,9 +4,8 @@ import { useTheme } from "@mui/material/styles";
 import logo from "../../assets/logo.png"
 import { Link as BrowserLink } from "react-router-dom";
 
-const AnonymousNavbar = ({ showLoginButton = true }) => {
+const AnonymousNavbar = () => {
   const theme = useTheme();
-
   return (
     <AppBar 
       position="fixed" 
@@ -21,11 +20,10 @@ const AnonymousNavbar = ({ showLoginButton = true }) => {
         <Typography variant="h6" sx={{ fontWeight: "bold", color: theme.palette.primary.main }}>
           Honss Real Estates
         </Typography>
-
-        {showLoginButton && 
+        
         <Button component={BrowserLink} to="/signin" variant="contained" color="primary">
           Sign In
-        </Button>}
+        </Button>
       </Toolbar>
     </AppBar>
   );
