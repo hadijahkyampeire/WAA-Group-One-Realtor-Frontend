@@ -11,7 +11,7 @@ import {
   Paper,
   Grid2,
 } from "@mui/material";
-import AuthenticatedLayout from "../../layouts/AuthenticatedLayout";
+import NavBarLayout from "../../layouts/NavBarLayout";
 import { addProperty } from "../../api/properties";
 import { useNavigate } from "react-router-dom";
 
@@ -60,7 +60,7 @@ const CreateProperty = () => {
   };
 
   return (
-    <AuthenticatedLayout>
+    <NavBarLayout>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <Paper elevation={4} sx={{ maxWidth: 500, padding: 2, borderRadius: 2 }}>
       <Typography variant="h5" fontWeight="bold" gutterBottom>
@@ -154,7 +154,7 @@ const CreateProperty = () => {
       </form>
     </Paper>
     </div>
-    </AuthenticatedLayout>
+    </NavBarLayout>
   );
 };
 

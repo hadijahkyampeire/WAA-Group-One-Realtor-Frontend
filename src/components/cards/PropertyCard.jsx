@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { 
   Card, 
   CardMedia, 
@@ -8,8 +8,10 @@ import {
   Box, 
   Chip 
 } from "@mui/material";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Favorite, FavoriteBorder, OpenInNew } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const statusColors = {
   AVAILABLE: "green",
@@ -19,7 +21,8 @@ const statusColors = {
 };
 
 const PropertyCard = ({ property }) => {
-  const isAuthenticated = false;
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const defaultImages = [
     "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uZG98ZW58MHx8MHx8fDA%3D",
     "https://images.unsplash.com/photo-1531383339897-f369f6422e40?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG93biUyMGhvdXNlJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D",
@@ -28,10 +31,16 @@ const PropertyCard = ({ property }) => {
   const theme = useTheme();
   const [liked, setLiked] = useState(false);
 
-  const handleOpenDetails = useCallback(() => {
-    window.open(`/properties/${property.id}`, "_blank");
-  }, [property.id]);
+  const handleOpenDetails = () => {
+    navigate(`/properties/${property.id}`);
+  };
 
+  const handleOpenInNewTab = (e) => {
+    e.stopPropagation();
+    window.open(`/properties/${property.id}`, "_blank");
+  };
+
+  const hasOfferPrivilages = user && user.userType === "CUSTOMER";
   return (
     <Card 
       sx={{ 
@@ -66,9 +75,12 @@ const PropertyCard = ({ property }) => {
           <Typography variant="h6" fontWeight="bold">
             ${property?.price?.toLocaleString()}
           </Typography>
-          {isAuthenticated && <IconButton onClick={() => setLiked(!liked)} color="primary">
+          {hasOfferPrivilages && <IconButton onClick={() => setLiked(!liked)} color="primary">
             {liked ? <Favorite color="error" /> : <FavoriteBorder />}
           </IconButton>}
+          <IconButton onClick={handleOpenInNewTab}>
+            <OpenInNew />
+          </IconButton>
         </Box>
 
         <Typography variant="body2">

@@ -3,7 +3,6 @@ import PropertyCard from '../../components/cards/PropertyCard';
 import { Typography, Container } from '@mui/material';
 
 function PropertiesList({ properties }) {
-
   return (
     <Container 
       sx={{ 

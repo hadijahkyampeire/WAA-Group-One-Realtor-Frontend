@@ -3,7 +3,7 @@ import { TextField, InputAdornment } from "@mui/material";
 const PriceInput = ({ label, value, onChange }) => {
   return (
     <TextField
-      sx={{ width: "12rem" }}
+      sx={{ width: "10rem" }}
       label={label}
       type="number"
       value={value}

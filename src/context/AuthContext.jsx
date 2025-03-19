@@ -8,7 +8,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const dispatch = useDispatch();
     const { user, token } = useSelector((state) => state.auth);
-    console.log(user, "user", token)
 
     useEffect(() => {
         if (token) {
