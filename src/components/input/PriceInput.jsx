@@ -8,7 +8,7 @@ const PriceInput = ({ label, value, onChange }) => {
       type="number"
       value={value}
       onChange={onChange}
-      SlotProps={{
+      slotProps={{
         startAdornment: <InputAdornment position="start">$</InputAdornment>,
       }}
       fullWidth

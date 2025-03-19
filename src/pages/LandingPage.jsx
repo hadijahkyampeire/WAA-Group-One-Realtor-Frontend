@@ -20,6 +20,7 @@ const LandingPage = () => {
     maxPrice: searchParams.get("maxPrice") || "",
   });
 
+  console.log(filters)
   const [filteredProperties, setFilteredProperties] = useState([...properties]);
   
   const fetchProperties = async() => {
@@ -48,7 +49,7 @@ const LandingPage = () => {
   
     useEffect(() => {
       fetchProperties();
-    }, []);
+    }, [filters]);
 
   const handleFilterChange = (name, value) => {
     setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
@@ -192,11 +193,10 @@ const LandingPage = () => {
               fullWidth
               variant="standard"
               placeholder="Search properties by location..."
-              SlotProps={{ disableUnderline: true }}
+              slotProps={{ input: { disableUnderline: true } }}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
-              slotProps={{ input: { disableUnderline: true } }}
               sx={{ marginLeft: 1 }}
             />
             <Button variant="contained" color="primary" sx={{ marginLeft: 1, borderRadius: "20px" }} onClick={handleSearch}>

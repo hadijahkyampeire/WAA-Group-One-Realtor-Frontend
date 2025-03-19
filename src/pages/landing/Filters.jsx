@@ -9,7 +9,7 @@ const Filters = ({ filters, onFilterChange }) => {
       select
       sx={{ width: "12rem" }}
       label="Property Status"
-      value={filters.propertyStatus}
+      value={filters.propertyStatus || ""}
       onChange={(e) => onFilterChange("propertyStatus", e.target.value)}
     >
       {["Available", "Sold", "Pending", "Contingent", "Unverified"].map((status) => (
@@ -40,7 +40,7 @@ const Filters = ({ filters, onFilterChange }) => {
       value={filters.propertyType}
       onChange={(e) => onFilterChange("propertyType", e.target.value)}
     >
-      {["house", "condo", "apartment", "land", "multiFamily", "townHouse"].map((type) => (
+      {["house", "condo", "apartment", "land", "multi_Family", "town_House"].map((type) => (
         <MenuItem key={type} value={type}>
           {type}
         </MenuItem>
