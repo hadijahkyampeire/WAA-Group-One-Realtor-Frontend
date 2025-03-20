@@ -17,17 +17,19 @@ import {
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Link } from 'react-router-dom'
-import { fetchOwnerProperties, fetchSingleProperty, updateProperty } from '../../api/properties';
+import { fetchOwnerProperties, fetchSingleProperty, updatePropertyStatus, deleteProperty, getPropertyOffers } from '../../api/properties';
 import NavBarLayout from '../../layouts/NavBarLayout';
 import { useAuth } from '../../context/AuthContext';
 import { updateOffer } from '../../api/offers';
+import { BiTrash } from 'react-icons/bi';
+import { OwnerPropertyDetailsModal } from './OwnerPropertyDetailsModal';
 
 
-function ListRow({ property, onChangeProperty }) {
+function ListRow({ property, onChangeProperty, onRowClick, getOwnerProperties }) {
   const [open, setOpen] = React.useState(false);
 
   const handlePropertyStatusChange = (propertyId, status) => {
-    updateProperty(propertyId, { ...property, propertyStatus: status, id: propertyId })
+    updatePropertyStatus(propertyId, status)
       .then((res) => {
         console.log("Property updated", res.data);
         onChangeProperty(propertyId);
@@ -37,22 +39,34 @@ function ListRow({ property, onChangeProperty }) {
       });
   }
 
-  const handleOfferStatusChange = (offerId, status, propertyId) => {
-    updateOffer(offerId, { offerStatus: status })
-      .then((res) => {
-        console.log("Offer updated", res.data);
-        onChangeProperty(propertyId);
-      })
-      .catch((error) => {
-        console.error("Error updating offer", error);
-      });
+  const handleDeleteProperty = (propertyId) => {
+    try {
+      deleteProperty(propertyId)
+        .then((res) => {
+          console.log("Property deleted", res.data);
+          onChangeProperty(propertyId);
+          getOwnerProperties();
+        })
+        .catch((error) => {
+          console.error("Error deleting property", error);
+        });
+    } catch(err) {
+      console.error(err || "Error deleting property")
+    }
   }
 
   return (
     <>
       <TableRow
+        onClick={() => onRowClick(property)}
         key={property.id}
-        sx={{ pointerEvents: property.enabled ? "initial" : "none", opacity: property.enabled ? 1 : 0.5 }}
+        sx={{ 
+          pointerEvents: property.enabled 
+          ? "initial" 
+          : "none", 
+          cursor: "pointer",
+          backgroundColor: property.propertyStatus === "SOLD" ? "#c8c4c4" : "white",
+          opacity: property.enabled ? 1 : 0.5 }}
       >
         <TableCell>
           {property.offers && property.offers.length > 0 &&
@@ -88,48 +102,18 @@ function ListRow({ property, onChangeProperty }) {
             <MenuItem value="UNVERIFIED">Unverified</MenuItem>
           </Select>
         </TableCell>
-      </TableRow>
-      {property.offers && property.offers.length > 0 && <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Enabled</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {property.offers.map((offer) => (
-                    <TableRow key={offer.id}>
-                      <TableCell component="th" scope="row">
-                        {offer.createDate}
-                      </TableCell>
-                      <TableCell>{offer.enabled}</TableCell>
-                      <TableCell align="right">{offer.amountOffered}</TableCell>
-                      <TableCell align="right">
-                        <Select
-                          defaultValue={offer.offerStatus}
-                          onChange={(e) => handleOfferStatusChange(offer.id, e.target.value, property.id)}
-                          size="small"
-                        >
-                          <MenuItem value="OFFERED">Select an Status</MenuItem>
-                          <MenuItem value="APPROVED">Approved</MenuItem>
-                          <MenuItem value="REJECTED">Rejected</MenuItem>
-                          <MenuItem value="CLOSED">Closed</MenuItem>
-                        </Select>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
+        <TableCell>
+          <IconButton 
+          color='error' 
+          variant='outline' 
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDeleteProperty(property.id)}}>
+            <BiTrash/>
+          </IconButton>
         </TableCell>
-      </TableRow>}
+
+      </TableRow>
     </>
   )
 }
@@ -138,10 +122,21 @@ function ListRow({ property, onChangeProperty }) {
 function OwnerDashboard() {
   const [properties, setProperties] = useState([]);
   const { user } = useAuth();
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [offers, setOffers] = useState([]);
 
   const getOwnerProperties = () => {
     fetchOwnerProperties()
     .then(res => setProperties(res.data))
+    .catch(err => console.error(err || "Error"))
+  }
+
+  const fetchOffersForProperty = (propertyId) => {
+    getPropertyOffers(propertyId)
+    .then(res => {
+      setOffers(res.data.payLoads);
+    })
     .catch(err => console.error(err || "Error"))
   }
 
@@ -162,7 +157,23 @@ function OwnerDashboard() {
     .catch(err => console.error(err || "Error"))
   }
 
-  console.log(properties, 'pp')
+  const handleRowClick = (property) => {
+    setSelectedProperty(property);
+    setIsModalOpen(true);
+    fetchOffersForProperty(property.id);
+  };
+
+  const handleOfferStatusChange = (offerId, status, propertyId) => {
+    updateOffer(offerId, { offerStatus: status })
+      .then((res) => {
+        console.log("Offer updated", res.data);
+        handleChangeProperty(propertyId);
+      })
+      .catch((error) => {
+        console.error("Error updating offer", error);
+      });
+  }
+
   return (
     <NavBarLayout>
       <div style={{ display:'flex', justifyContent: 'space-between', alignContent: 'flex-end'}}>
@@ -170,6 +181,7 @@ function OwnerDashboard() {
         <Tooltip title={!ownerAllowed ? "You need to be verified to start adding properties" : ""} arrow>
           <span>
             <Button 
+              variant="contained"
               component={Link} to="/properties/create" 
               disabled={!ownerAllowed}>
                 Add Property
@@ -189,14 +201,27 @@ function OwnerDashboard() {
                 <TableCell><b>Area (sqft)</b></TableCell>
                 <TableCell><b>Price ($)</b></TableCell>
                 <TableCell><b>Status</b></TableCell>
+                <TableCell><b>Actions</b></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {properties.map((property) => <ListRow key={property.id} property={property} onChangeProperty={handleChangeProperty}/>)}
+              {properties.map((property) => <ListRow 
+                key={property.id} 
+                property={property} 
+                onChangeProperty={handleChangeProperty} 
+                getOwnerProperties={getOwnerProperties}
+                onRowClick={handleRowClick} />)}
             </TableBody>
           </Table>
         </TableContainer>
       </Box>
+      <OwnerPropertyDetailsModal 
+        open={isModalOpen}
+        property={selectedProperty}
+        onClose={() => setIsModalOpen(false)}
+        handleOfferStatusChange={handleOfferStatusChange}
+        offers={offers}
+        />
     </NavBarLayout>
   )
 }

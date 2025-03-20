@@ -3,7 +3,7 @@ import { Typography, Dialog, DialogContent } from "@mui/material";
 import { fetchProperty } from "../../api/properties";
 import { PropertyDetailsContent } from "./Details";
 
-const PropertyDetailsModal = ({  id, open, handleClose }) => {
+const PropertyDetailsModal = ({  id, open, handleClose, offers }) => {
   const [propertyDetails, setPropertyDetails] = useState({});
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const PropertyDetailsModal = ({  id, open, handleClose }) => {
     return (
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogContent>
-          <PropertyDetailsContent property={propertyDetails}  />
+          <PropertyDetailsContent property={propertyDetails} offers={offers} />
         </DialogContent>
       </Dialog>
     );

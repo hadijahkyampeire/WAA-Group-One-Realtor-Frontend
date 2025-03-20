@@ -113,6 +113,7 @@ const PropertyCard = ({ property }) => {
 
         <Chip label={property.propertyType} color="primary" variant="outlined" sx={{ mt: 1 }} />
 
+        <Typography variant="caption" display="block" mt={1} color="textSecondary">No. of Offers: {property.offersCount || 0}</Typography>
         <Typography variant="caption" display="block" mt={1} color="textSecondary">
           Owned by: {property.owner.firstName} {property.owner.lastName}
         </Typography>
@@ -121,6 +122,7 @@ const PropertyCard = ({ property }) => {
     <PropertyDetailsModal 
       id={property.id}
       open={isModalOpen} 
+      offers={property.offersCount}
       handleClose={handleClose}/>
   </>
   );

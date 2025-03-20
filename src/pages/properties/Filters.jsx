@@ -4,7 +4,7 @@ import { Box, TextField, MenuItem, FormControlLabel, Switch } from "@mui/materia
 
 const Filters = ({ filters, onFilterChange, showFavorites, onToggleFavorites }) => {
   return (
-    <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+    <Box sx={{ display: "flex", gap: 1 }}>
     <TextField
       select
       size="sm"

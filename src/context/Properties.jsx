@@ -47,7 +47,6 @@ export const PropertiesProvider = ({ children }) => {
   }, [filters]);
 
   const toggleFavorite = (propertyId) => {
-    console.log("Toggling favorite for property:", propertyId);
     setFavorites((prevFavorites) => {
       let updatedFavorites;
       if (prevFavorites.includes(propertyId)) {

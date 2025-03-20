@@ -22,7 +22,7 @@ const fallbackImages = [
   "https://media.istockphoto.com/id/520614902/photo/bright-modern-contemporary-kitchen-and-dinning-room.webp"
 ];
 
-export const PropertyDetailsContent = ({ property }) => {
+export const PropertyDetailsContent = ({ property, offers }) => {
   const { user } = useAuth();
   const canMakeAnOffer = property?.propertyStatus === "AVAILABLE" || property?.propertyStatus === "PENDING";
   const hasOfferPrivileges = user && user.userType === "CUSTOMER";
@@ -30,6 +30,7 @@ export const PropertyDetailsContent = ({ property }) => {
   const [open, setOpen] = useState(false);
   const { favoriteProperties, toggleFavorite } = useProperties();
   const isFavorite = favoriteProperties?.some((fav) => fav.id === property.id);
+  console.log(property, 'pp')
 
   return (
     <>
@@ -95,7 +96,7 @@ export const PropertyDetailsContent = ({ property }) => {
       </Typography>
 
       <Typography variant="h6" sx={{ mt: 3, fontWeight: "bold" }}>Offers</Typography>
-      <Typography>{property.offers?.length || 0} offer(s)</Typography>
+      <Typography>{offers || 0} offer(s)</Typography>
 
       <Typography variant="caption" display="block" mt={1} color="textSecondary">
         Owned by: {property.owner?.firstName} {property.owner?.lastName}

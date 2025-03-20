@@ -12,7 +12,6 @@ const OfferHistoryList = () => {
   useEffect(() => {
     fetchCustomerOffers()
     .then((res) => {
-      console.log(res.data)
       setOffers(res.data.payLoads);
     });
   }, []);
@@ -20,7 +19,10 @@ const OfferHistoryList = () => {
   const handleCancelOffer = async (offer) => {
     try {
       await updateOffer(offer.id, {...offer, offerStatus: "CANCELLED" });
-
+      fetchCustomerOffers()
+      .then((res) => {
+        setOffers(res.data.payLoads);
+      });
     } catch(err) {
       console.error(err || "Error cancelling an offer")
     }

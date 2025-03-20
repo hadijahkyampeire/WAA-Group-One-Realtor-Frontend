@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from "@mui/material/styles";
 import { logout } from '../../store/slices/authSlices';
 import { AppBar, Toolbar, Button, Typography } from '@mui/material';
