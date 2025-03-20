@@ -1,12 +1,10 @@
-import React from "react";
-import AnonymousLayout from "../layouts/AnonymousLayout";
+import React, { useState } from "react";
 import { Typography, Box, TextField, Button } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import bg from "../assets/background-image.jpg"
 import PropertiesList from "./properties/PropertiesList";
 import Filters from "./properties/Filters";
 import NavBarLayout from "../layouts/NavBarLayout";
-// import { properties } from "../data/properties";
 
 import { useProperties } from "../context/Properties";
 
@@ -18,8 +16,10 @@ const LandingPage = () => {
     filteredProperties, 
     applyFilters, 
     clearFilters,
-    handleFilterChange 
+    handleFilterChange,
+    favoriteProperties 
   } = useProperties();
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const isClearButtonActive = Object.values(filters).some((val) => val) || searchTerm.trim() !== "";
 
@@ -31,6 +31,9 @@ const LandingPage = () => {
     }
   };
 
+  const propertiesToShow = showFavorites
+  ? favoriteProperties
+  : filteredProperties;
   return (
     <NavBarLayout>
       <Box>
@@ -87,13 +90,17 @@ const LandingPage = () => {
       </Box>
       <Box sx={{ mt: 4 }}>
         <Box sx={{ mb: 4, display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-          <Filters filters={filters} onFilterChange={handleFilterChange} />
+          <Filters 
+            filters={filters} 
+            onFilterChange={handleFilterChange} 
+            onToggleFavorites={() => setShowFavorites(!showFavorites)}
+            showFavorites={showFavorites} />
           <Button variant="contained" color="primary" onClick={applyFilters}>Apply Filters</Button>
           <Button variant="outlined" color="secondary" onClick={clearFilters} disabled={!isClearButtonActive}>
             Clear Filters
           </Button>
         </Box>
-        <PropertiesList properties={filteredProperties} />
+        <PropertiesList properties={propertiesToShow} />
       </Box>
     </NavBarLayout>
   );

@@ -13,6 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import { useAuth } from "../../context/AuthContext";
 import { getFileUrl } from "../../api";
 import PropertyDetailsModal from "./PropertyDetailsModal";
+import { useProperties } from "../../context/Properties";
 
 const statusColors = {
   AVAILABLE: "green",
@@ -25,7 +26,10 @@ const PropertyCard = ({ property }) => {
   const { user } = useAuth();
   const defaultImages = "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uZG98ZW58MHx8MHx8fDA%3D%22"
   const theme = useTheme();
-  const [liked, setLiked] = useState(false);
+  const { favoriteProperties, toggleFavorite } = useProperties();
+
+  const isFavorite = favoriteProperties?.some((fav) => fav.id === property.id);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClose = () => setIsModalOpen(false);
@@ -71,9 +75,16 @@ const PropertyCard = ({ property }) => {
           <Typography variant="h6" fontWeight="bold">
             ${property?.price?.toLocaleString()}
           </Typography>
-          {hasOfferPrivilages && <IconButton onClick={() => setLiked(!liked)} color="primary">
-            {liked ? <Favorite color="error" /> : <FavoriteBorder />}
-          </IconButton>}
+          {hasOfferPrivilages && (
+            <IconButton
+              onClick={(event) => {
+                event.stopPropagation();
+                toggleFavorite(property.id);
+              }}
+              color="primary">
+              {isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
+            </IconButton>
+        )}
           <IconButton onClick={handleOpenInNewTab}>
             <OpenInNew />
           </IconButton>

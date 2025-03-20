@@ -1,8 +1,8 @@
 import PriceInput from "../../components/input/PriceInput";
-import { Box, TextField, MenuItem } from "@mui/material";
+import { Box, TextField, MenuItem, FormControlLabel, Switch } from "@mui/material";
 
 
-const Filters = ({ filters, onFilterChange }) => {
+const Filters = ({ filters, onFilterChange, showFavorites, onToggleFavorites }) => {
   return (
     <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
     <TextField
@@ -48,8 +48,25 @@ const Filters = ({ filters, onFilterChange }) => {
       ))}
     </TextField>
 
-    <PriceInput label="Min Price" value={filters.minPrice} onChange={(e) => onFilterChange("minPrice", e.target.value)} />
-    <PriceInput label="Max Price" value={filters.maxPrice} onChange={(e) => onFilterChange("maxPrice", e.target.value)} />
+    <PriceInput 
+      label="Min Price" 
+      value={filters.minPrice} 
+      onChange={(e) => onFilterChange("minPrice", e.target.value)} />
+    <PriceInput 
+      label="Max Price" 
+      value={filters.maxPrice} 
+      onChange={(e) => onFilterChange("maxPrice", e.target.value)} />
+
+    <FormControlLabel
+        control={
+          <Switch
+            checked={showFavorites}
+            onChange={(e) => onToggleFavorites(e.target.checked)}
+            color="primary"
+          />
+        }
+        label="Show Favorites"
+      />
   </Box>
   );
 };

@@ -14,6 +14,7 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import Carousel from "react-material-ui-carousel";
 import { getFileUrl } from "../../api";
 import AddOfferComponent from "../../pages/customer/AddEditOffer";
+import { useProperties } from "../../context/Properties";
 
 const fallbackImages = [
   "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=900&auto=format&fit=crop&q=60",
@@ -27,7 +28,8 @@ export const PropertyDetailsContent = ({ property }) => {
   const hasOfferPrivileges = user && user.userType === "CUSTOMER";
   const images = property?.images || fallbackImages;
   const [open, setOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
+  const { favoriteProperties, toggleFavorite } = useProperties();
+  const isFavorite = favoriteProperties?.some((fav) => fav.id === property.id);
 
   return (
     <>
@@ -47,8 +49,14 @@ export const PropertyDetailsContent = ({ property }) => {
           }}
         />
         {hasOfferPrivileges && (
-          <IconButton onClick={() => setLiked(!liked)} color="primary">
-            {liked ? <Favorite color="error" /> : <FavoriteBorder />}
+          <IconButton 
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleFavorite(property.id);
+            }}
+            size="large"
+            color="primary">
+            {isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
           </IconButton>
         )}
         {user ?

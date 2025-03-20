@@ -14,6 +14,10 @@ export const PropertiesProvider = ({ children }) => {
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
   });
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
 
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
@@ -41,6 +45,21 @@ export const PropertiesProvider = ({ children }) => {
   useEffect(() => {
     fetchProperties();
   }, [filters]);
+
+  const toggleFavorite = (propertyId) => {
+    console.log("Toggling favorite for property:", propertyId);
+    setFavorites((prevFavorites) => {
+      let updatedFavorites;
+      if (prevFavorites.includes(propertyId)) {
+        updatedFavorites = prevFavorites.filter((id) => id !== propertyId);
+      } else {
+        updatedFavorites = [...prevFavorites, propertyId];
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      return updatedFavorites;
+    });
+  };
 
   const filterProperties = (data = properties) => {
     let filtered = [...data];
@@ -108,7 +127,11 @@ export const PropertiesProvider = ({ children }) => {
     setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
   };
 
-  const filterVerifiedOwnersProperties = filteredProperties.filter(p => p.owner.verified === true && p.owner.enabled === true)
+  const filterVerifiedOwnersProperties = filteredProperties.filter(p => p.owner.verified === true && p.owner.enabled === true);
+  const favoriteProperties = properties.filter((property) =>
+    favorites.includes(property.id)
+  );
+
   return (
     <PropertiesContext.Provider
       value={{
@@ -118,6 +141,8 @@ export const PropertiesProvider = ({ children }) => {
         setFilters,
         properties,
         filteredProperties: filterVerifiedOwnersProperties,
+        favoriteProperties,
+        toggleFavorite,
         applyFilters,
         clearFilters,
         handleFilterChange
