@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useProperties } from '../../context/Properties'
 import { Box, TextField, Button } from '@mui/material';
 import Filters from '../properties/Filters';
@@ -13,9 +13,10 @@ function Properties() {
       filteredProperties, 
       applyFilters, 
       clearFilters,
-      handleFilterChange 
+      handleFilterChange,
+      favoriteProperties 
     } = useProperties();
-
+  const [showFavorites, setShowFavorites] = useState(false);
   const isClearButtonActive = Object.values(filters).some((val) => val) || searchTerm.trim() !== "";
 
   const handleSearch = () => { applyFilters()};
@@ -25,6 +26,10 @@ function Properties() {
       handleSearch();
     }
   };
+
+  const propertiestToShow = showFavorites
+  ? favoriteProperties
+  : filteredProperties;
 
   return (
     <Box>
@@ -55,14 +60,18 @@ function Properties() {
           </Button>
       </Box>
       <Box sx={{ mb: 4, display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-        <Filters filters={filters} onFilterChange={handleFilterChange} />
+        <Filters 
+          filters={filters} 
+          onFilterChange={handleFilterChange} 
+          showFavorites={showFavorites}
+          onToggleFavorites={() => setShowFavorites(!showFavorites)} />
         <Button variant="contained" color="primary" onClick={applyFilters}>Apply Filters</Button>
         <Button variant="outlined" color="secondary" onClick={clearFilters} disabled={!isClearButtonActive}>
           Clear Filters
         </Button>
       </Box>
       <Box>
-        <PropertiesList properties={filteredProperties} />
+        <PropertiesList properties={propertiestToShow} />
       </Box>
     </Box>
   )
