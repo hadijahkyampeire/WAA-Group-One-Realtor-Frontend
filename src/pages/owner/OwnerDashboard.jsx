@@ -17,13 +17,36 @@ import {
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Link } from 'react-router-dom'
-import { fetchOwnerProperties } from '../../api/properties';
+import { fetchOwnerProperties, fetchSingleProperty, updateProperty } from '../../api/properties';
 import NavBarLayout from '../../layouts/NavBarLayout';
 import { useAuth } from '../../context/AuthContext';
+import { updateOffer } from '../../api/offers';
 
 
-function ListRow({ property = {} }) {
+function ListRow({ property, onChangeProperty }) {
   const [open, setOpen] = React.useState(false);
+
+  const handlePropertyStatusChange = (propertyId, status) => {
+    updateProperty(propertyId, { ...property, propertyStatus: status, id: propertyId })
+      .then((res) => {
+        console.log("Property updated", res.data);
+        onChangeProperty(propertyId);
+      })
+      .catch((error) => {
+        console.error("Error updating property", error);
+      });
+  }
+
+  const handleOfferStatusChange = (offerId, status, propertyId) => {
+    updateOffer(offerId, { offerStatus: status })
+      .then((res) => {
+        console.log("Offer updated", res.data);
+        onChangeProperty(propertyId);
+      })
+      .catch((error) => {
+        console.error("Error updating offer", error);
+      });
+  }
 
   return (
     <>
@@ -55,11 +78,14 @@ function ListRow({ property = {} }) {
         <TableCell>
           <Select
             value={property.propertyStatus}
-            // onChange={(e) => handleStatusChange(property.id, e.target.value)}
+            onChange={(e) => handlePropertyStatusChange(property.id, e.target.value)}
             size="small"
           >
             <MenuItem value="AVAILABLE">Available</MenuItem>
             <MenuItem value="SOLD">Sold</MenuItem>
+            <MenuItem value="PENDING">Pending</MenuItem>
+            <MenuItem value="CONTINGENT">Contingent</MenuItem>
+            <MenuItem value="UNVERIFIED">Unverified</MenuItem>
           </Select>
         </TableCell>
       </TableRow>
@@ -86,13 +112,14 @@ function ListRow({ property = {} }) {
                       <TableCell align="right">{offer.amountOffered}</TableCell>
                       <TableCell align="right">
                         <Select
-                          value={offer.offerStatus}
-                          // onChange={(e) => handleStatusChange(property.id, e.target.value)}
+                          defaultValue={offer.offerStatus}
+                          onChange={(e) => handleOfferStatusChange(offer.id, e.target.value, property.id)}
                           size="small"
                         >
-                          <MenuItem value="OFFERED">Offered</MenuItem>
+                          <MenuItem value="OFFERED">Select an Status</MenuItem>
                           <MenuItem value="APPROVED">Approved</MenuItem>
                           <MenuItem value="REJECTED">Rejected</MenuItem>
+                          <MenuItem value="CLOSED">Closed</MenuItem>
                         </Select>
                       </TableCell>
                     </TableRow>
@@ -123,6 +150,19 @@ function OwnerDashboard() {
   },[]);
 
   const ownerAllowed = user?.verified && user?.enabled;
+  const handleChangeProperty = (propertyId) => {
+    fetchSingleProperty(propertyId)
+    .then(res => {
+      const updatedProperty = res.data;
+      const index = properties.findIndex(property => property.id === propertyId);
+      const newProperties = [...properties];
+      newProperties[index] = updatedProperty;
+      setProperties(newProperties);
+    })
+    .catch(err => console.error(err || "Error"))
+  }
+
+  console.log(properties, 'pp')
   return (
     <NavBarLayout>
       <div style={{ display:'flex', justifyContent: 'space-between', alignContent: 'flex-end'}}>
@@ -152,7 +192,7 @@ function OwnerDashboard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {properties.map((property) => <ListRow key={property.id} property={property} />)}
+              {properties.map((property) => <ListRow key={property.id} property={property} onChangeProperty={handleChangeProperty}/>)}
             </TableBody>
           </Table>
         </TableContainer>
