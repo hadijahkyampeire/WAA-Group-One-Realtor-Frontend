@@ -34,6 +34,7 @@ export const UsersTable = () => {
 
   const handleToggleStatus = (id, active) => {
     dispatch(toggleUserStatus({ id, active }));
+    dispatch(getCustomers());
   };
 
   if (loading) return <Typography>Loading...</Typography>;

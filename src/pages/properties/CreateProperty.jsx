@@ -9,6 +9,10 @@ import {
   Typography,
   Paper,
   Grid2,
+  List,
+  ListItem,
+  ListItemText,
+  Box
 } from "@mui/material";
 import NavBarLayout from "../../layouts/NavBarLayout";
 import { addProperty } from "../../api/properties";
@@ -22,11 +26,15 @@ const initialProperty = {
   price: "",
   listingType: "FOR_SALE",
   propertyType: "HOUSE",
+  images: []
 };
 
 const CreateProperty = () => {
   const navigate = useNavigate();
   const [property, setProperty] = useState({...initialProperty});
+
+  const [uploading, setUploading] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,16 +50,49 @@ const CreateProperty = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = async (e) => {
+    const files = Array.from(e.target.files);
+    for (const file of files) {
+      await uploadImage(file.name);
+    }
+  };
+
+  const uploadImage = async (file) => {
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:8080/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const uploadedFile = { name: file.name, url: response.data.filePath };
+
+      setSelectedFiles((prev) => [...prev, uploadedFile]);
+
+      setProperty((prev) => ({
+        ...prev,
+        images: [...prev.images, response.data.filePath],
+      }));
+    } catch (error) {
+      console.error("Upload failed:", error);
+    }
+
+    setUploading(false);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addProperty(property)
-    .then((res) => {
-      console.log("Property created", res.data);
+
+    try {
+      await addProperty(property);
+      alert("Property created successfully!");
       navigate("/owner/dashboard")
-    })
-    .catch((error) => {
-      console.error("Error creating property", error);
-    });
+    } catch(err) {
+      console.error("Error creating property", err);
+    }
   };
 
   return (
@@ -122,10 +163,6 @@ const CreateProperty = () => {
               <Select name="listingType" value={property.listingType} onChange={handleChange} required>
                 <MenuItem value="FOR_SALE">For Sale</MenuItem>
                 <MenuItem value="FOR_RENT">For Rent</MenuItem>
-                {/* <MenuItem value="SOLD">Sold</MenuItem>
-                <MenuItem value="PENDING">Pending</MenuItem>
-                <MenuItem value="CONTINGENT">Contingent</MenuItem>
-                <MenuItem value="UNVERIFIED">Unverified</MenuItem> */}
               </Select>
             </FormControl>
           </Grid2>
@@ -142,6 +179,20 @@ const CreateProperty = () => {
             </FormControl>
           </Grid2>
         </Grid2>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <label>Upload Property Images <span style={{ color: "red" }}>*</span></label>
+          <input type="file" multiple accept="image/*" onChange={handleFileChange} style={{ margin: "10px 0" }} />
+          {uploading && <Typography variant="body2">Uploading images...</Typography>}
+          {selectedFiles.length > 0 && (
+          <List>
+            {selectedFiles.map((file, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={file?.name} secondary="Uploaded ✔" />
+              </ListItem>
+            ))}
+          </List>
+        )}
+        </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
           Submit Property
         </Button>
