@@ -31,6 +31,8 @@ export const PropertiesTable = () => {
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error: {error}</Typography>;
 
+  console.log(properties);
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -52,23 +54,25 @@ export const PropertiesTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {properties.map((property) => (
+            {properties
+            ?.filter((property) => typeof property === "object" && property !== null) 
+            ?.map((property) => (
               <TableRow key={property.id}>
                 <TableCell>{property.propertyType}</TableCell>
                 <TableCell>
-                  {property.address.street}, {property.address.city},{" "}
-                  {property.address.state} {property.address.zip},{" "}
-                  {property.address.country}
+                  {property.address?.street}, {property.address?.city},{" "}
+                  {property.address?.state} {property.address?.zip},{" "}
+                  {property.address?.country}
                 </TableCell>
                 <TableCell>{property.area}</TableCell>
                 <TableCell>{property.bedrooms}</TableCell>
                 <TableCell>{property.bathrooms}</TableCell>
-                <TableCell>${property.price.toLocaleString()}</TableCell>
+                <TableCell>${property.price?.toLocaleString()}</TableCell>
                 <TableCell>{property.propertyStatus}</TableCell>
                 <TableCell>
-                  {property.owner.firstName} {property.owner.lastName}
+                  {property.owner?.firstName} {property.owner?.lastName}
                 </TableCell>
-                <TableCell>{property.owner.email}</TableCell>
+                <TableCell>{property.owner?.email}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -22,7 +22,7 @@ import NavBarLayout from '../../layouts/NavBarLayout';
 import { useAuth } from '../../context/AuthContext';
 
 
-function ListRow({ property }) {
+function ListRow({ property = {} }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -44,7 +44,7 @@ function ListRow({ property }) {
         </TableCell>
         <TableCell>{property.propertyType}</TableCell>
         <TableCell>
-          {property.address.street}, {property.address.city}, {property.address.state}
+          {property?.address?.street}, {property?.address?.city}, {property?.address?.state}
         </TableCell>
         <TableCell>
           {property.area.toLocaleString()}<br/>
