@@ -14,8 +14,6 @@ const PropertyDetailsModal = ({  id, open, handleClose }) => {
     }
   }, [id]);
 
-  console.log(propertyDetails, 'pp--')
-
   if (!propertyDetails) return <Typography>Property Not Found</Typography>;
 
     return (

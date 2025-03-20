@@ -12,16 +12,17 @@ import {
   MenuItem,
   IconButton,
   Collapse,
-  Typography
+  Tooltip
 } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Link } from 'react-router-dom'
 import { fetchOwnerProperties } from '../../api/properties';
 import NavBarLayout from '../../layouts/NavBarLayout';
+import { useAuth } from '../../context/AuthContext';
 
 
-function ListRow({ property }) {
+function ListRow({ property = {} }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -43,7 +44,7 @@ function ListRow({ property }) {
         </TableCell>
         <TableCell>{property.propertyType}</TableCell>
         <TableCell>
-          {property.address.street}, {property.address.city}, {property.address.state}
+          {property?.address?.street}, {property?.address?.city}, {property?.address?.state}
         </TableCell>
         <TableCell>
           {property.area.toLocaleString()}<br/>
@@ -109,6 +110,7 @@ function ListRow({ property }) {
 
 function OwnerDashboard() {
   const [properties, setProperties] = useState([]);
+  const { user } = useAuth();
 
   const getOwnerProperties = () => {
     fetchOwnerProperties()
@@ -120,12 +122,20 @@ function OwnerDashboard() {
     getOwnerProperties();
   },[]);
 
-  console.log(properties, 'pp')
+  const ownerAllowed = user?.verified && user?.enabled;
   return (
     <NavBarLayout>
       <div style={{ display:'flex', justifyContent: 'space-between', alignContent: 'flex-end'}}>
         <h1>Your Properties</h1>
-        <Button component={Link} to="/properties/create">Add Property</Button>
+        <Tooltip title={!ownerAllowed ? "You need to be verified to start adding properties" : ""} arrow>
+          <span>
+            <Button 
+              component={Link} to="/properties/create" 
+              disabled={!ownerAllowed}>
+                Add Property
+            </Button>
+          </span>
+        </Tooltip>
       </div>
 
       <Box>

@@ -31,10 +31,12 @@ export const OwnersTable = () => {
 
   const handleToggleStatus = (id, active) => {
     dispatch(toggleUserStatus({ id, active }));
+    dispatch(getOwners());
   };
 
   const handleVerify = (id, verified) => {
     dispatch(verifyOwner({ id, verified }));
+    dispatch(getOwners());
   };
 
   if (loading) return <Typography>Loading...</Typography>;
