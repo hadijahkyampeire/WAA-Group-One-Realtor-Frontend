@@ -18,6 +18,7 @@ import NavBarLayout from "../../layouts/NavBarLayout";
 import { addProperty } from "../../api/properties";
 import { useNavigate } from "react-router-dom";
 import { uploadFile } from "../../api/upload";
+import { getFileUrl } from "../../api";
 
 const initialProperty = {
   address: { street: "", city: "", state: "", zip: "", country: "US" },
@@ -36,6 +37,7 @@ const CreateProperty = () => {
 
   const [uploading, setUploading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +71,7 @@ const CreateProperty = () => {
       }));
     } else {
       console.log(error);
-      //TODO handle error
+      setError(error.message || "Un expected upload error")
     }
 
     setUploading(false);
@@ -80,13 +82,20 @@ const CreateProperty = () => {
 
     try {
       await addProperty(property);
-      alert("Property created successfully!");
       navigate("/owner/dashboard");
     } catch (err) {
       console.error("Error creating property", err);
     }
   };
-  console.log({ selectedFiles });
+
+  const handleDeleteImage = (index) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+    setProperty((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
   return (
     <NavBarLayout>
       <div
@@ -229,7 +238,7 @@ const CreateProperty = () => {
                     required
                   >
                     <MenuItem value="HOUSE">House</MenuItem>
-                    <MenuItem value="TOWNHOUSE">Townhouse</MenuItem>
+                    <MenuItem value="TOWN_HOUSE">Townhouse</MenuItem>
                     <MenuItem value="MULTI_FAMILY">Multi-Family</MenuItem>
                     <MenuItem value="CONDO">Condo</MenuItem>
                     <MenuItem value="APARTMENT">Apartment</MenuItem>
@@ -251,18 +260,35 @@ const CreateProperty = () => {
               {uploading && (
                 <Typography variant="body2">Uploading images...</Typography>
               )}
-              {selectedFiles.length > 0 && (
-                <List>
-                  {selectedFiles.map((file, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={file?.name}
-                        secondary="Uploaded ✔"
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              )}
+              {error && <Typography>{error}</Typography>}
+              <List>
+                {selectedFiles.map((file, index) => (
+                  <ListItem
+                    key={index}
+                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                  >
+                    <img
+                      src={getFileUrl(file.url)}
+                      alt={file.name}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                        borderRadius: "4px",
+                      }}
+                    />
+                    <ListItemText primary={file.name} secondary="Uploaded ✔" />
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      size="small"
+                      onClick={() => handleDeleteImage(index)}
+                    >
+                      Delete
+                    </Button>
+                  </ListItem>
+                ))}
+              </List>
             </Box>
             <Button
               type="submit"
